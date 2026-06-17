@@ -1,14 +1,20 @@
 interface inputProps {
   title: string;
   inputValue: string;
-  // e: React.ChangeEvent<HTMLInputElement>;
+  onInput(e: React.ChangeEvent<HTMLInputElement>): void;
 }
 
 const Label = (props: inputProps) => {
   return (
     <label className="label">
       {props.title}
-      <input type="text" value={props.inputValue} />
+      <input
+        type="text"
+        value={props.inputValue}
+        onChange={(e) => {
+          props.onInput(e);
+        }}
+      />
     </label>
   );
 };
