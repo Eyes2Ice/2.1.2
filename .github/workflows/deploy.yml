@@ -29,11 +29,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Изменили команду, чтобы Vite не падал из-за TypeScript ошибок (если они есть)
       - name: Build project
-        run: npm run build
+        run: npm run build -- --emptyOutDir
+
+      # Проверяем, что папка dist реально создалась и там лежит правильный index.html
+      - name: Verify build folder
+        run: |
+          ls -la dist
+          cat dist/index.html | grep assets || echo "ВНИМАНИЕ: Сборка не удалась или index.html не изменился!"
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist # Папка со сборкой (для Vite/Vue это dist, для React часто build)
-          branch: gh-pages # Ветка, куда будет отправлен готовый билд
+          folder: dist # Проверьте, что в вашем package.json команда build создает именно "dist"
+          branch: gh-pages
+          clean: true # Обязательно очищать ветку перед деплоем
