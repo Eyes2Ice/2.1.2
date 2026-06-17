@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write # Разрешение на запись в ветку gh-pages
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
