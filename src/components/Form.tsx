@@ -32,13 +32,13 @@ const Form = () => {
       <form className="form">
         <Label
           title="Название поля"
-          inputValue={propName}
-          onInput={changePropName}
+          value={propName}
+          onChange={changePropName}
         />
         <Label
           title="Значение поля"
-          inputValue={valueName}
-          onInput={changeValueName}
+          value={valueName}
+          onChange={changeValueName}
         />
         <button className="button" onClick={addPropToObj}>
           Создать поле в объекте

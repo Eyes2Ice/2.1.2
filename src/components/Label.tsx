@@ -1,20 +1,14 @@
-interface inputProps {
+import type { InputHTMLAttributes } from "react";
+
+interface inputProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
-  inputValue: string;
-  onInput(e: React.ChangeEvent<HTMLInputElement>): void;
 }
 
-const Label = (props: inputProps) => {
+const Label = ({ title, ...props }: inputProps) => {
   return (
     <label className="label">
-      {props.title}
-      <input
-        type="text"
-        value={props.inputValue}
-        onChange={(e) => {
-          props.onInput(e);
-        }}
-      />
+      {title}
+      <input type="text" {...props} />
     </label>
   );
 };
